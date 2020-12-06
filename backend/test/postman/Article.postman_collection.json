@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "ee60ea78-90b7-49b8-a3a9-49b639f13b6c",
+		"name": "Article",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post un Article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "949f010b-1f3f-4184-83f5-2406b0e70f48",
+						"exec": [
+							"var jsonRequest = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.test(\"Prospect créée\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// extracting & checking the JSON response body",
+							"var jsonResponse = pm.response.json();",
+							"",
+							"pm.test(\"Le détail de l'entrée saisie est fourni en retour, et les données sont conformes\", function () {",
+							"",
+							"    pm.expect(jsonResponse.id).to.be.not.null;",
+							"    pm.expect(jsonResponse.denomination).to.equal(jsonRequest.denomination);",
+							"    pm.expect(jsonResponse.type).to.equal(jsonRequest.type);",
+							"    pm.expect(jsonResponse.family).to.equal(jsonRequest.family);",
+							"    pm.expect(jsonResponse.color).to.equal(jsonRequest.color);",
+							"    pm.expect(jsonResponse.createdOn).to.be.not.null;",
+							"    // pm.expect(jsonResponse.lastModifiedOn).to.be.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "13e7abbb-885a-43e5-b8da-231860458103",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"denomination\": \"abde\",\n\t\"type\": \"Textile\",\n\t\"family\": \"Tshirt\",\n\t\"color\":\"Noir\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/article/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tout les Articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/article/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"article",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Article par id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/article/493fe5e8-fc87-4014-afcd-46af0d4363ab",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"article",
+						"493fe5e8-fc87-4014-afcd-46af0d4363ab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Devis par id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "338daf2c-643b-466a-b674-c555c527d7a5",
+						"exec": [
+							"pm.test(\"L'entrée Langue est supprimée\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.not.withBody;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/prospect/a648ec63-7f90-4ec3-8eae-230784aa7e2d",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"prospect",
+						"a648ec63-7f90-4ec3-8eae-230784aa7e2d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Update de Status Devis ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e878a763-d6b4-485a-9d7c-e23394205482",
+						"exec": [
+							"var jsonRequest = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.test(\"Devis modifié\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// extracting & checking the JSON response body",
+							"var jsonResponse = pm.response.json();",
+							"",
+							"pm.test(\"Le détail de l'entrée saisie est fourni en retour, et les données sont conformes\", function () {",
+							"",
+							"    pm.expect(jsonResponse.id).to.be.not.null;",
+							"    pm.expect(jsonResponse.denomination).to.equal(jsonRequest.denomination);",
+							"    pm.expect(jsonResponse.type).to.equal(jsonRequest.type);",
+							"    pm.expect(jsonResponse.family).to.equal(jsonRequest.family);",
+							"    pm.expect(jsonResponse.color).to.equal(jsonRequest.color);",
+							"    pm.expect(jsonResponse.createdOn).to.be.not.null;",
+							"    // pm.expect(jsonResponse.lastModifiedOn).to.be.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"denomination\": \"tee\",\n    \"type\": \"Pack\",\n    \"family\": \"Tshirt\",\n    \"color\": \"Bleu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/article/493fe5e8-fc87-4014-afcd-46af0d4363ab/update",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"article",
+						"493fe5e8-fc87-4014-afcd-46af0d4363ab",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

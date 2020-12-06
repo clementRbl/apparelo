@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "a00f23ab-61c7-4886-b0c2-28cd556dae36",
+		"name": "Prospect for Devis Express",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post un Prospect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "949f010b-1f3f-4184-83f5-2406b0e70f48",
+						"exec": [
+							"var jsonRequest = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.test(\"Prospect créée\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// extracting & checking the JSON response body",
+							"var jsonResponse = pm.response.json();",
+							"",
+							"pm.test(\"Le détail de l'entrée saisie est fourni en retour, et les données sont conformes\", function () {",
+							"",
+							"    pm.expect(jsonResponse.id).to.be.not.null;",
+							"    pm.expect(jsonResponse.firstName).to.equal(jsonRequest.firstName);",
+							"    pm.expect(jsonResponse.lastName).to.equal(jsonRequest.lastName);",
+							"    pm.expect(jsonResponse.email).to.equal(jsonRequest.email);",
+							"    pm.expect(jsonResponse.tel).to.equal(jsonRequest.tel);",
+							"    pm.expect(jsonResponse.organisation_name).to.equal(jsonRequest.organisation_name);",
+							"    pm.expect(jsonResponse.organisation_type).to.equal(jsonRequest.organisation_type);",
+							"    pm.expect(jsonResponse.createdOn).to.be.not.null;",
+							"    // pm.expect(jsonResponse.lastModifiedOn).to.be.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "13e7abbb-885a-43e5-b8da-231860458103",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"abde\",\n\t\"lastName\": \"bens\",\n\t\"email\": \"abdebens@gmail.com\",\n\t\"tel\":\"+33767874334\",\n\t\"organisation_name\": \"Octave\",\n\t\"organisation_type\": \"Particulier\"\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/prospect/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"prospect",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get un tout les Prospect",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/prospect/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"prospect",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Prospect par id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/prospect/a648ec63-7f90-4ec3-8eae-230784aa7e2d",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"prospect",
+						"a648ec63-7f90-4ec3-8eae-230784aa7e2d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Devis par id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "338daf2c-643b-466a-b674-c555c527d7a5",
+						"exec": [
+							"pm.test(\"L'entrée Langue est supprimée\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.not.withBody;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/prospect/a648ec63-7f90-4ec3-8eae-230784aa7e2d",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"prospect",
+						"a648ec63-7f90-4ec3-8eae-230784aa7e2d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Update de Status Devis ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e878a763-d6b4-485a-9d7c-e23394205482",
+						"exec": [
+							"var jsonRequest = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.test(\"Devis modifié\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// extracting & checking the JSON response body",
+							"var jsonResponse = pm.response.json();",
+							"",
+							"pm.test(\"Le détail de l'entrée saisie est fourni en retour, et les données sont conformes\", function () {",
+							"",
+							"    pm.expect(jsonResponse.firstName).to.equal(jsonRequest.firstName);",
+							"    pm.expect(jsonResponse.lastName).to.equal(jsonRequest.lastName);",
+							"    pm.expect(jsonResponse.email).to.equal(jsonRequest.email);",
+							"    pm.expect(jsonResponse.tel).to.equal(jsonRequest.tel);",
+							"    pm.expect(jsonResponse.organisation_name).to.equal(jsonRequest.organisation_name);",
+							"    pm.expect(jsonResponse.organisation_type).to.equal(jsonRequest.organisation_type);",
+							"    pm.expect(jsonResponse.createdOn).to.be.not.null;",
+							"    pm.expect(jsonResponse.lastModifiedOn).to.be.not.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"organisation_type\": \"Associatif\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/prospect/a648ec63-7f90-4ec3-8eae-230784aa7e2d/update",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"prospect",
+						"a648ec63-7f90-4ec3-8eae-230784aa7e2d",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

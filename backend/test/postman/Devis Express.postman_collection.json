@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "ff8a33b9-7d63-443a-8207-c25352016572",
+		"name": "Devis Express",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post un Devis Express",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "4f4f172c-1802-42bd-afde-56232d435e6d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6c50e0e-5962-4adb-a70b-c9b82050ad3b",
+						"exec": [
+							"var jsonRequest = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.test(\"Devis créée\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// extracting & checking the JSON response body",
+							"var jsonResponse = pm.response.json();",
+							"",
+							"pm.test(\"Le détail de l'entrée saisie est fourni en retour, et les données sont conformes\", function () {",
+							"",
+							"    pm.expect(jsonResponse.id).to.be.not.null;",
+							"    pm.expect(jsonResponse.prospectId).to.be.not.null",
+							"    pm.expect(jsonResponse.message).to.equal(jsonRequest.message);",
+							"    pm.expect(jsonResponse.createdOn).to.be.not.null;",
+							"    pm.expect(jsonResponse.lastModifiedOn).to.be.not.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n\t\"articleId\": \"58fba00f-18db-4d0b-a8a4-9f1a2629f5b3\",\n    \"firstName\": \"zou5\",\n    \"lastName\": \"zou4\",\n    \"email\": \"zou4@gmail.com\",\n    \"tel\":\"+33767874334\",\n    \"organisation_name\": \"zou5\",\n    \"organisation_type\": \"Particulier\",\n    \"message\": \"zou5\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/devis/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"devis",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get un tout les Devis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/devis/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"devis",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Devis par id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/devis/",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"devis",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Devis par id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "338daf2c-643b-466a-b674-c555c527d7a5",
+						"exec": [
+							"pm.test(\"L'entrée Langue est supprimée\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.not.withBody;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{api_base_url}}/devis/dbec3ec1-2347-4ab3-bc4b-2a0911b75225",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"devis",
+						"dbec3ec1-2347-4ab3-bc4b-2a0911b75225"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch Update de Status Devis ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e878a763-d6b4-485a-9d7c-e23394205482",
+						"exec": [
+							"var jsonRequest = JSON.parse(pm.request.body.raw);",
+							"",
+							"pm.test(\"Devis modifié\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							"",
+							"// extracting & checking the JSON response body",
+							"var jsonResponse = pm.response.json();",
+							"",
+							"pm.test(\"Le détail de l'entrée saisie est fourni en retour, et les données sont conformes\", function () {",
+							"",
+							"    pm.expect(jsonResponse.message).to.equal(jsonRequest.message);",
+							"    pm.expect(jsonResponse.logo).to.equal(jsonRequest.logo);",
+							"    pm.expect(jsonResponse.createdOn).to.be.not.null;",
+							"    pm.expect(jsonResponse.lastModifiedOn).to.be.not.null;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"message\": \"qwe\",\n    \"type\": \"EXPRESS\",\n    \"logo\": \"ds\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_base_url}}/devis/dbec3ec1-2347-4ab3-bc4b-2a0911b75225/update",
+					"host": [
+						"{{api_base_url}}"
+					],
+					"path": [
+						"devis",
+						"dbec3ec1-2347-4ab3-bc4b-2a0911b75225",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
